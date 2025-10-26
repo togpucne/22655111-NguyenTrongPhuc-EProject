@@ -6,6 +6,7 @@ const axios = require("axios");
 /**
  * Class to hold the API implementation for the product services
  */
+
 class ProductController {
   constructor() {
     this.createOrder = this.createOrder.bind(this);
