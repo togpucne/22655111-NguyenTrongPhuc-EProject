@@ -10,7 +10,7 @@ router.post("/buy", isAuthenticated, productController.createOrder);
 router.get("/", isAuthenticated, productController.getProducts);
 // 🧾 LẤY HÓA ĐƠN  
 router.get("/order/:id", isAuthenticated, productController.getOrderById);
-// Lay san pham
-router.get("/product/:id", isAuthenticated, productController.getProductById)
+
+router.get("/product/:id", isAuthenticated, productController.getProductById);
 
 module.exports = router;

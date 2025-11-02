@@ -166,43 +166,41 @@ class ProductController {
     }
   };
 
-  // 🎯 THÊM HÀM NÀY - LẤY CHI TIẾT SẢN PHẨM
-  async getProductById(req, res, next) {
+  // 
+  async getProductById(req, res, next){
     try {
-      const { id } = req.params;
-      console.log("🔍 Lấy chi tiết sản phẩm ID:", id);
+      const {id} = req.params;
 
-      // Tìm sản phẩm trong database
-      const product = await Product.findById(id);
+    const product = await Product.findById(id);
 
-      if (!product) {
-        return res.status(404).json({
-          success: false,
-          message: "Không tìm thấy sản phẩm",
-        });
-      }
-
-      // Trả về thông tin sản phẩm
-      res.status(200).json({
+    if(!product){
+      return res.status(404).json({
+        success: false,
+        message: "Ko thay",
+      })
+    }
+    res.status(200).json({
         success: true,
         data: {
           _id: product._id,
-          name: product.name,
-          price: product.price,
-          description: product.description,
+          name:product.name,
+          description:product.description,
+          price:product.price,
           createdAt: product.createdAt,
-        },
-      });
+        }
+      })
+
+
+    
     } catch (error) {
-      console.error("Lỗi lấy sản phẩm:", error);
       res.status(500).json({
         success: false,
-        message: "Lỗi server",
-      });
+        message: "Loi server",
+      })
     }
   }
-  // =================================================================================
-
+  // 
+  
 }
 
 module.exports = ProductController;
