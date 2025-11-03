@@ -12,6 +12,8 @@ class ProductController {
     this.createOrder = this.createOrder.bind(this);
     this.getOrderStatus = this.getOrderStatus.bind(this);
     this.getProductById = this.getProductById.bind(this);
+
+    
     this.ordersMap = new Map();
   }
 
@@ -166,41 +168,39 @@ class ProductController {
     }
   };
 
-  // 
+  //
   async getProductById(req, res, next){
     try {
       const {id} = req.params;
+      const product = await Product.findById(id);
 
-    const product = await Product.findById(id);
-
-    if(!product){
-      return res.status(404).json({
-        success: false,
-        message: "Ko thay",
-      })
-    }
-    res.status(200).json({
-        success: true,
-        data: {
-          _id: product._id,
-          name:product.name,
-          description:product.description,
-          price:product.price,
-          createdAt: product.createdAt,
-        }
-      })
+      if(!product){
+        return res.status(404).json({
+          success: false,
+          message: "Ko thay"
+        })
+      }
 
 
-    
+      res.status(200).json({
+          success: true,
+          data: {
+            _id: product._id,
+            name: product.name,
+            price: product.price,
+            description: product.description,
+            createdAt: product.createdAt
+          }
+        })
     } catch (error) {
       res.status(500).json({
-        success: false,
-        message: "Loi server",
-      })
+          success: false,
+          message: "Loi server"
+        })
     }
   }
-  // 
-  
+
+  //
 }
 
 module.exports = ProductController;
